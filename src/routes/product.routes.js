@@ -6,4 +6,8 @@ router.get('/',(req, res)=>{
   res.send('All Products');
 });
 
+router.get('/:id',(req, res)=>{
+  res.send(`Product with ID: ${req.params.id}`);
+});
+
 module.exports = router;

@@ -2,6 +2,9 @@ const math = require('./math');
 // const user = require('./user.json');
 const log = require('./logger');  
 const user = require('./user');
+require('dotenv').config();
+
+console.log(process.env.PORT);
 
 log('application has started');
 

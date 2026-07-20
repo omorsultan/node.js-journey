@@ -1,13 +1,25 @@
 const userService = require('../services/user.service');
 
-exports.getUsers = (req, res) =>{
-  const users = userService.getUsers();
+exports.getUsers = (req, res) => {
 
-  res.status(200).json({
-    success   : true,
-    message   : "Users fetched successfully",
-    data      : users
-  });
+    try {
+
+        const users = userService.getUsers();
+
+        res.status(200).json({
+            success: true,
+            data: users
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+
+    }
+
 };
 
 exports.getUserById = (req, res) =>{
@@ -18,4 +30,14 @@ exports.getUserById = (req, res) =>{
     message   : "User fetched successfully",
     data      : user
   });
+};
+exports.createUser = (req, res) => {
+
+    const user = userService.createUser(req.body);
+
+    res.status(201).json({
+        success: true,
+        data: user
+    });
+
 };

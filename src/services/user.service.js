@@ -16,5 +16,18 @@ exports.getUsers = () => {
 };
 
 exports.getUserById = (id) =>{
-  return users.find(user => user.id === id);
+  return users.find(user => user.id == id);
+};
+
+exports.createUser = (data) => {
+
+    const user = {
+        id: users.length + 1,
+        ...data
+    };
+
+    users.push(user);
+
+    return user;
+
 };

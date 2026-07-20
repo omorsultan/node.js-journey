@@ -2,8 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get("/",(req,res)=>{
-  res.send("All Users");
-});
+const userController = require('../controllers/user.controller'); 
+
+
+router.get("/", userController.getUsers);
+router.get("/:id",userController.getUserById);
+
 
 module.exports = router;

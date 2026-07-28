@@ -10,9 +10,12 @@ const users = [
     email: "jane.smith@example.com"
   }
 ];
+const pool = require("../database/db");
 
-exports.getUsers = () => {
-  return users;
+exports.getUsers = async () => {
+    const [rows] = await pool.query("SELECT * FROM users;");
+      console.log(rows);
+    return rows;
 };
 
 exports.getUserById = (id) =>{

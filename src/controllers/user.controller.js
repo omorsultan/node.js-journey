@@ -1,10 +1,10 @@
 const userService = require('../services/user.service');
 
-exports.getUsers = (req, res) => {
+exports.getUsers = async(req, res) => {
 
     try {
 
-        const users = userService.getUsers();
+        const users = await userService.getUsers();
 
         res.status(200).json({
             success: true,

@@ -1,29 +1,27 @@
 const userService = require('../services/user.service');
 
-exports.getUsers = async(req, res) => {
-
+exports.getUsers = async (req, res) => {
     try {
+        const { role } = req.query;
 
-        const users = await userService.getUsers();
+        const users = role
+            ? await userService.getUsersByRole(role)
+            : await userService.getUsers();
 
         res.status(200).json({
             success: true,
             data: users
         });
-
     } catch (error) {
-
         res.status(500).json({
             success: false,
-            message: "Internal Server Error"
+            message: error.message
         });
-
     }
-
 };
 
-exports.getUserById = (req, res) =>{
-  const user = userService.getUserById(req.params.id);
+exports.getUserById = async(req, res) =>{
+  const user = await userService.getUserById(req.params.id);
 
   res.json({
     success   : true,
@@ -40,4 +38,19 @@ exports.createUser = (req, res) => {
         data: user
     });
 
+};
+exports.getUsersByRole = async (req, res) => {
+    try {
+        const users = await userService.getUsersByRole(req.params.role);
+
+        res.json({
+            success: true,
+            data: users
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
 };
